@@ -12,7 +12,7 @@ public class Customer extends Person implements Serializable{
 	private String password;
 	
 	public Customer(){
-
+		super();
 	}
 	
 	public Customer(String userName, String password) {
