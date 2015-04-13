@@ -26,26 +26,32 @@
          <tr>
              <td>Password:</td>
              <td><springForm:password path="password"/><br></td>
+             <td><springForm:errors path="password" cssClass="error" /></td>
          </tr>
          <tr>
               <td>First Name:</td>
               <td><springForm:input path="firstName"/><br></td>
+              <td><springForm:errors path="firstName" cssClass="error" /></td>
          </tr>
          <tr>
              <td>Last Name:</td>
              <td><springForm:input path="lastName"/><br></td>
+             <td><springForm:errors path="lastName" cssClass="error" /></td>
          </tr>
          <tr>
              <td>E-mail:</td>
              <td><springForm:input path="email"/><br></td>
+             <td><springForm:errors path="email" cssClass="error" /></td>
          </tr>
          <tr>
              <td>Phone:</td>
              <td><springForm:input path="phone"/><br></td>
+             <td><springForm:errors path="phone" cssClass="error" /></td>
          </tr>
          <tr>
              <td>Date of Birth:</td>
              <td><springForm:input path="dob"/><br></td>
+             <td><springForm:errors path="dob" cssClass="error" /></td>
          </tr>
          <tr>
              <td><input type = "submit" name="submit" value="Register"/><br></td>
