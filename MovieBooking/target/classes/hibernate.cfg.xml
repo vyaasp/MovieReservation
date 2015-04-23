@@ -13,6 +13,16 @@
         <property name="hibernate.show_sql">true</property>
         <mapping class="com.me.moviebooking.model.Person"></mapping>
         <mapping class="com.me.moviebooking.model.Customer"></mapping>
+        <mapping class="com.me.moviebooking.model.Movie"></mapping>
+        <mapping class="com.me.moviebooking.model.MovieComment"></mapping>
+        <mapping class="com.me.moviebooking.model.Cinema"></mapping>
+        <mapping class="com.me.moviebooking.model.Screen"></mapping>
+        <mapping class="com.me.moviebooking.model.Showtime"></mapping>
         <mapping resource="com/me/moviebooking/model/Person.hbm.xml"/>
+        <mapping resource="com/me/moviebooking/model/Cinema.hbm.xml"/>
+        <mapping resource="com/me/moviebooking/model/Movie.hbm.xml"/>
+        <mapping resource="com/me/moviebooking/model/MovieComment.hbm.xml"/>
+        <mapping resource="com/me/moviebooking/model/Screen.hbm.xml"/>
+        <mapping resource="com/me/moviebooking/model/Showtime.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

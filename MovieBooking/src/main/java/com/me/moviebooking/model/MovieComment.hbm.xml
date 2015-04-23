@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.me.moviebooking.model.MovieComment" table="movie_comment">
+		<composite-id class="com.me.moviebooking.model.MovieComment">
+      <key-many-to-one name="customer" class="com.me.moviebooking.model.Customer">
+            <column name="customer_id" />
+        </key-many-to-one>
+        <key-many-to-one name="movie" class="com.me.moviebooking.model.Movie">
+            <column name="movie_id" />
+        </key-many-to-one>
+    	</composite-id> 
+        <property name="comment" type="java.lang.String">
+            <column name="comment" />
+        </property>
+    <many-to-one name="customer" class="com.me.moviebooking.model.Customer" update="false" insert="false" fetch="select">
+        <column name="customer_id" />
+    </many-to-one>
+    <many-to-one name="movie" class="com.me.moviebooking.model.Movie" update="false" insert="false" fetch="select">
+        <column name="movie_id" />
+    </many-to-one>
+    </class>
+</hibernate-mapping>

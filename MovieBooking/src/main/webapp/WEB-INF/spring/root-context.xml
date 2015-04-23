@@ -5,5 +5,6 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="loginDao" class="com.me.moviebooking.dao.CustomerDAO"></bean>
+	<bean id="movieDao" class="com.me.moviebooking.dao.MovieDAO"></bean>
 	<bean id="customerValidator" class="com.me.moviebooking.validator.CustomerValidator"></bean>
 </beans>

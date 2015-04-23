@@ -1,9 +1,7 @@
 package com.me.moviebooking.model;
 
-import java.sql.Date;
+import java.util.Date;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
@@ -11,6 +9,8 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.me.moviebooking.validator.Phone;
 
 public class Person {
 	@Size(min=2, max=30) 
@@ -22,7 +22,8 @@ public class Person {
 	@DateTimeFormat(pattern="MM/dd/yyyy")
     @NotNull @Past
 	private Date dob;
-	private int phone;
+	@Phone
+	private String phone;
 	private int person_id;
 	
 	public Person(){
@@ -30,7 +31,7 @@ public class Person {
 	}
 	
 	public Person(String firstName, String lastName, String email, Date dob,
-			int phone, int person_id) {
+			String phone, int person_id) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -72,11 +73,11 @@ public class Person {
 		this.dob = dob;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 

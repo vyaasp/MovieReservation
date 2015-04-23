@@ -114,6 +114,15 @@
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 		</dependency>
+		
+		
+<dependency>
+  <groupId>joda-time</groupId>
+  <artifactId>joda-time</artifactId>
+  <version>1.6.2</version>
+  <scope>runtime</scope>
+ </dependency>
+		
 				
 		<!-- Servlet -->
 		<dependency>
@@ -178,6 +187,7 @@
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
             </plugin>
+            
         </plugins>
     </build>
 </project>

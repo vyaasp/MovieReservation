@@ -1,7 +1,5 @@
 package com.me.moviebooking.dao;
 
-import javax.swing.JOptionPane;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 

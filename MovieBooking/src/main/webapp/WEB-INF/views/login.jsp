@@ -39,7 +39,7 @@
          </tr> 
 </springForm:form>
 
-<springForm:form method = "POST" commandName="customer" action="registration">
+<springForm:form method = "POST" action="registration">
          <tr>
              <td><input type = "submit" name="submit" value="New User?"/><br></td>
          </tr>

@@ -1,7 +1,10 @@
 package com.me.moviebooking;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -20,7 +23,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.me.moviebooking.dao.CustomerDAO;
+import com.me.moviebooking.dao.MovieDAO;
+import com.me.moviebooking.model.BookingSelection;
+import com.me.moviebooking.model.Cinema;
 import com.me.moviebooking.model.Customer;
+import com.me.moviebooking.model.CustomerMoviePrefs;
+import com.me.moviebooking.model.Movie;
+import com.me.moviebooking.model.MoviePrefs;
+import com.me.moviebooking.model.Showtime;
+import com.me.moviebooking.model.UserPreferences;
 import com.me.moviebooking.validator.CustomerValidator;
 
 /**
@@ -33,19 +44,21 @@ public class HomeController {
 	private CustomerDAO customerDao;
 	
 	@Autowired
-    @Qualifier("customerValidator")
-    private Validator validator;
- 
-    @InitBinder
-    private void initBinder(WebDataBinder binder) {
-        binder.setValidator(validator);
-    }
-    
-    @ModelAttribute("customer")
-    public Customer createEmployeeModel() {
-        // ModelAttribute value should be same as used in the empSave.jsp
-        return new Customer();
-    }
+	private MovieDAO movieDao;
+	
+//	@Autowired
+//    @Qualifier("customerValidator")
+//    private Validator validator;
+// 
+//    @InitBinder
+//    private void initBinder(WebDataBinder binder) {
+//        binder.setValidator(validator);
+//    }
+//    
+//    @ModelAttribute("customer")
+//    public Customer createEmployeeModel() {
+//        return new Customer();
+//    }
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -60,22 +73,12 @@ public class HomeController {
 		return "login";
 	}
 	
-	@RequestMapping(value = "/registered", method = RequestMethod.POST)
-	public String login(Model model, @Validated Customer customer,
-			BindingResult result, HttpServletResponse response,
-			HttpServletRequest request) {
-		logger.info("Registered.!");
-		boolean newUser = customerDao.createCustomer(customer);
-		model.addAttribute("customer", customer);
-		return "login";
-	}
 	
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-	public String validate(Model model, @Validated Customer customer,
+	public String validate(Model model, Customer customer,
 			BindingResult result, HttpServletResponse response,
 			HttpServletRequest request) throws Exception {
 		logger.info("Validation Page.!");
-		logger.info("User:"+customer.getUserName());
 		if (result.hasErrors()) {
             logger.info("Returning custSave.jsp page");
             return "login";
@@ -91,11 +94,60 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-	public String registartion(Model model, @Valid Customer customer,
-			BindingResult result, HttpServletResponse response,
+	public String registartion(Model model,
 			HttpServletRequest request) throws Exception {
 		logger.info("Registration Page.!");
-		model.addAttribute("customer", customer);
+		model.addAttribute("customer", new Customer());
 		return "registration";
+	}
+	
+	@RequestMapping(value = "/registered", method = RequestMethod.POST)
+	public String login(Model model, @Valid @ModelAttribute("customer") Customer customer,
+			BindingResult result, HttpServletResponse response,
+			HttpServletRequest request) {
+		logger.info("Registered.!");
+		if (result.hasErrors()) {
+            logger.info("Returning registration.jsp page");
+            return "registration";
+        }
+		try{
+		customerDao.createCustomer(customer);
+		}catch(ConstraintViolationException cve){
+			logger.info("Returning registration.jsp page");
+            return "registration";
+		}
+		model.addAttribute("customer", customer);
+		return "login";
+	}
+	
+	@RequestMapping(value = "/selectmovie", method = RequestMethod.POST)
+	public String booking(Model model, @ModelAttribute("customer") Customer customer,
+			BindingResult result, HttpServletResponse response,
+			HttpServletRequest request) throws Exception {
+		logger.info("Booking Page.!");
+		List<Showtime> showtimes = movieDao.getShowTimes();
+		MoviePrefs mp = new MoviePrefs(customer,
+				showtimes, new UserPreferences());
+		model.addAttribute("mp", mp);
+		return "booking";
+	}
+	
+	@RequestMapping(value = "/booktickets", method = RequestMethod.POST)
+	public String showScreens(Model model, @Valid @ModelAttribute("mp") MoviePrefs mp,
+			BindingResult result, HttpServletResponse response,
+			HttpServletRequest request) throws Exception {
+		System.out.println(mp.getUp().getMovieId());
+		System.out.println(mp.getUp().getScreenId());
+		System.out.println(mp.getUp().getCinemaId());
+		System.out.println(mp.getUp().getTime());
+		logger.info("Screens Page.!");
+		if (result.hasErrors()) {
+            logger.info("Returning registration.jsp page");
+            return "booking";
+        }
+		Showtime showtime = movieDao.getBookingShow(mp.getUp());
+		model.addAttribute("bs", new BookingSelection(mp.getCustomer(),
+				showtime, 0, 0));
+		return "tickets";
 	}
 }

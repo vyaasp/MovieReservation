@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.me.moviebooking.model.Showtime" table="showtime">
+		<composite-id class="com.me.moviebooking.model.Showtime">
+ 		<key-many-to-one name="movie" class="com.me.moviebooking.model.Movie" >
+            <column name="movie_id"/>
+        </key-many-to-one> 
+        <key-many-to-one name="cinema" class="com.me.moviebooking.model.Cinema">
+            <column name="cinema_id" />
+        </key-many-to-one>
+        <key-many-to-one name="screen" class="com.me.moviebooking.model.Screen">
+            <column name="screen_id" />
+        </key-many-to-one>
+       
+    	</composite-id>
+        <many-to-one name="movie" class="com.me.moviebooking.model.Movie" update="false" insert="false" fetch="select">
+        <column name="movie_id" />
+    	</many-to-one>
+    <many-to-one name="cinema" class="com.me.moviebooking.model.Cinema" update="false" insert="false" fetch="select">
+        <column name="cinema_id" />
+    </many-to-one>
+        <many-to-one name="screen" class="com.me.moviebooking.model.Screen" update="false" insert="false" fetch="select">
+        <column name="screen_id" />
+    </many-to-one>
+    <property name="showtime" type="java.lang.String">
+            <column name="time" />
+        </property>
+    </class>
+</hibernate-mapping>

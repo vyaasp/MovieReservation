@@ -5,7 +5,7 @@
     <class name="com.me.moviebooking.model.Person" table="PERSON">
        <id name="person_id" type="java.lang.Integer">
             <column name="person_id" />
-            <generator class="increment" />
+            <generator class="increment"/>
         </id>
         <property name="firstName" type="java.lang.String">
             <column name="first_name" />
@@ -19,8 +19,11 @@
         <property name="dob" type="java.lang.String">
             <column name="dob" />
         </property>
+        <property name="phone" type="java.lang.Integer">
+            <column name="phone" />
+        </property>
         <joined-subclass name="com.me.moviebooking.model.Customer" table="CUSTOMER">
-        <key column ="person_id"></key> 
+        <key column ="person_id"></key>
         <property name="userName" type="java.lang.String"><column name="user_name" /></property>
         <property name="password" type="java.lang.String"><column name="password" /></property>
         </joined-subclass>
