@@ -3,43 +3,47 @@ package com.me.moviebooking.model;
 import java.io.Serializable;
 
 public class MovieComment implements Serializable{
-	
-	Movie movie;
-	Customer customer;
+	Integer bookingId;
+	BookingHistory bookingHistory;
+	Integer rating;
 	String comment;
 	
-	public MovieComment(Movie movie, Customer customer, String comment) {
-		super();
-		this.movie = movie;
-		this.customer = customer;
-		this.comment = comment;
-	}	
-	public MovieComment() {
+	public MovieComment(){
 		super();
 	}
 	
-	public Movie getMovie() {
-		return movie;
+	public MovieComment(Integer bookingId, BookingHistory bookingHistory,
+			Integer rating, String comment) {
+		super();
+		this.bookingId = bookingId;
+		this.bookingHistory = bookingHistory;
+		this.rating = rating;
+		this.comment = comment;
 	}
-
-	public void setMovie(Movie movie) {
-		this.movie = movie;
+	
+	public Integer getBookingId() {
+		return bookingId;
 	}
-
-	public Customer getCustomer() {
-		return customer;
+	public void setBookingId(Integer movieCommentId) {
+		this.bookingId = movieCommentId;
 	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public BookingHistory getBookingHistory() {
+		return bookingHistory;
 	}
-
+	public void setBookingHistory(BookingHistory bookingHistory) {
+		this.bookingHistory = bookingHistory;
+	}
+	public Integer getRating() {
+		return rating;
+	}
+	public void setRating(Integer rating) {
+		this.rating = rating;
+	}
 	public String getComment() {
 		return comment;
 	}
-
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-
+	
 }

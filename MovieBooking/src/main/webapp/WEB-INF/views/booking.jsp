@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://www.springframework.org/tags/form"
@@ -18,7 +18,24 @@
 <script type="text/javascript"
     src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script type="text/javascript">
+function getImage(titel) { 
+	$.ajax({ 
+	    type: "GET",
+	    dataType: "json",
+	    url: "http://www.omdbapi.com/?t="+$('#movie option:selected').text(),
+	    success: function(data){
+	    	$('#imdbRating').text("imdbRating: "+data.imdbRating);
+	    	$('#Runtime').text("Runtime: "+data.Runtime);
+	    	$('#movie_poster').attr("src",data.Poster);
+	    },
+	    async:false,
+	    error: function() {
+	    	$('#movie_poster').attr("src",'');
+	    }
+	});
+	}
 function onMovieChange(val) {
+	this.getImage();
 	$('#time').empty();
 	<c:forEach var="listVar" items="${mp.showtimes}">
 		if("${listVar.movie.movieId}" == $('#movie').val()){
@@ -99,8 +116,8 @@ function onTimeChange(val) {
 	<c:forEach var="listVar" items="${mp.showtimes}">
 			if("${listVar}" == $('#time').val()){
         	 $('#movie').append($('<option>', { 
-                 value: "${listVar.cinema.cinemaId}",
-                 text : "${listVar.cinema}" 
+                 value: "${listVar.movie.movieId}",
+                 text : "${listVar.movie}" 
              })); 
 		}
     </c:forEach>
@@ -128,8 +145,8 @@ function onScreenChange(val) {
 	<c:forEach var="listVar" items="${mp.showtimes}">
 		if("${listVar.screen.screenId}" == $('#screen').val()){
         	 $('#movie').append($('<option>', { 
-                 value: "${listVar.cinema.cinemaId}",
-                 text : "${listVar.cinema}" 
+                 value: "${listVar.movie.movieId}",
+                 text : "${listVar.movie}" 
              })); 
 		}
     </c:forEach>
@@ -137,9 +154,10 @@ function onScreenChange(val) {
 </script>
 </head>
 <body>
-	<h1>Please select your preference</h1>
+	<h1>Please select your preference:</h1>
 	<table>
 		<springForm:form method="POST" commandName="mp" action="booktickets">
+		<springForm:input type="hidden" path="userName" value="${userName}"/>
 			<tr>
 				<td>Select a Movie:</td>
 				<td><springForm:select id ="movie" path="up.movieId" onchange="onMovieChange(this);">
@@ -180,6 +198,14 @@ function onScreenChange(val) {
 				<td><input type="submit" name="submit" value="Book Tickets" /><br></td>
 			</tr>
 		</springForm:form>
+<springForm:form method = "GET" action="/moviebooking">
+<a href="javascript:;" onclick="parentNode.submit();">Logout</a>
+</springForm:form>
+	</table>
+	<table>
+	<tr><td><div id="imdbRating"></div></td></tr>
+	<tr><td><div id="Runtime"></div></td></tr>
+	<tr><td><img id="movie_poster"></img></td></tr>
 	</table>
 </body>
 </html>

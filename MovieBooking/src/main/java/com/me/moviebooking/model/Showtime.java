@@ -7,6 +7,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 public class Showtime implements Serializable{
+	Integer showtimeId;
 	Movie movie;
 	Cinema cinema;
 	Screen screen;
@@ -16,14 +17,22 @@ public class Showtime implements Serializable{
 		super();
 	}
 	
-	public Showtime(Movie movie, Cinema cinema, Screen screen, String showtime) {
+	public Showtime(Integer showtimeId, Movie movie, Cinema cinema, Screen screen, String showtime) {
 		super();
+		this.showtimeId = showtimeId;
 		this.movie = movie;
 		this.cinema = cinema;
 		this.screen = screen;
 		this.showtime = showtime;
 	}
 	
+	public Integer getShowtimeId() {
+		return showtimeId;
+	}
+
+	public void setShowtimeId(Integer showtimeId) {
+		this.showtimeId = showtimeId;
+	}
 	public Movie getMovie() {
 		return movie;
 	}

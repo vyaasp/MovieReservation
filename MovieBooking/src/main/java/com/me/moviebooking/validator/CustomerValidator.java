@@ -1,5 +1,6 @@
 package com.me.moviebooking.validator;
 
+
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -24,4 +25,5 @@ public class CustomerValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password",
 				"validate.userName", "Password required");
 	}
+	
 }

@@ -13,14 +13,5 @@
         <property name="cast" type="java.lang.String">
             <column name="cast"/>
         </property>
-        <property name="rating" type="java.lang.Integer">
-            <column name="rating"/>
-        </property>
-        <property name="imdb" type="java.lang.String">
-            <column name="imdb"/>
-        </property>
-        <property name="rottenTomatoes" type="java.lang.String">
-            <column name="rotten_tomatoes"/>
-        </property>
     </class>
 </hibernate-mapping>

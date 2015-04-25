@@ -13,9 +13,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.me.moviebooking.validator.Phone;
 
 public class Person {
-	@Size(min=2, max=30) 
+	@NotEmpty @Size(min=2, max=30) 
 	private String firstName;
-	@NotEmpty @Email
+	@NotEmpty @Size(min=2, max=30) 
 	private String lastName;
 	@NotEmpty @Email
 	private String email;
@@ -24,21 +24,21 @@ public class Person {
 	private Date dob;
 	@Phone
 	private String phone;
-	private int person_id;
+	private Integer personId;
 	
 	public Person(){
 		super();
 	}
 	
 	public Person(String firstName, String lastName, String email, Date dob,
-			String phone, int person_id) {
+			String phone, Integer personId) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.dob = dob;
 		this.phone = phone;
-		this.person_id = person_id;
+		this.personId = personId;
 	}
 		
 	public String getFirstName() {
@@ -81,12 +81,12 @@ public class Person {
 		this.phone = phone;
 	}
 
-	public int getPerson_id() {
-		return person_id;
+	public Integer getPersonId() {
+		return personId;
 	}
 
-	public void setPerson_id(int person_id) {
-		this.person_id = person_id;
+	public void setPersonId(Integer person_id) {
+		this.personId = person_id;
 	}
 	
 }

@@ -22,7 +22,9 @@
         <mapping resource="com/me/moviebooking/model/Cinema.hbm.xml"/>
         <mapping resource="com/me/moviebooking/model/Movie.hbm.xml"/>
         <mapping resource="com/me/moviebooking/model/MovieComment.hbm.xml"/>
+        <mapping resource="com/me/moviebooking/model/ScreenComment.hbm.xml"/>
         <mapping resource="com/me/moviebooking/model/Screen.hbm.xml"/>
         <mapping resource="com/me/moviebooking/model/Showtime.hbm.xml"/>
+        <mapping resource="com/me/moviebooking/model/BookingHistory.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

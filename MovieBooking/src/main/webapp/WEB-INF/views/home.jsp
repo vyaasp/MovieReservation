@@ -24,12 +24,28 @@
 </tr>
 <tr><td>
 <springForm:form method = "POST" commandName="customer" action="selectmovie" id="bookForm">
+<springForm:input type="hidden" path="userName" value="${customer.userName}"/>
 <a href="javascript:;" onclick="parentNode.submit();">Book Tickets</a>
 </springForm:form>
 </td></tr>
 <tr><td>
-<springForm:form method = "POST" commandName="customer" action="history" id="historyForm">
+<%-- <springForm:form method = "POST" commandName="customer" action="history" id="historyForm">
+<springForm:input type="hidden" path="personId" value="${customer.personId}"/>
 <a href="javascript:;" onclick="parentNode.submit();">Booking History</a>
+</springForm:form> --%>
+<a href="/moviebooking/history/${customer.personId}">Booking History</a>
+</td></tr>
+<tr><td>
+<springForm:form method = "POST" commandName="customer" action="rateBooking" id="rateForm">
+<springForm:input type="hidden" path="personId" value="${customer.personId}"/>
+<a href="javascript:;" onclick="parentNode.submit();">Rate Booking</a>
+</springForm:form>
+<form method = "POST" action="movieRating" name="comments" id="commentsForm">
+ <input type="hidden"  value="${customer.personId}"/> 
+<a href="javascript:;" onclick="parentNode.submit();">View Movie Comments</a>
+</form>
+<springForm:form method = "GET" action="/moviebooking">
+<a href="javascript:;" onclick="parentNode.submit();">Logout</a>
 </springForm:form>
 </td></tr>
 </table>

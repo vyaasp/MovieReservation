@@ -20,7 +20,7 @@
 	Welcome, Kindly Log In
 </h1>
  <table>
-<springForm:form method = "POST" commandName="customer" action="authenticate">
+<springForm:form method = "POST" commandName="customerLogin" action="authenticate">
          <tr>
               <td>Enter your User Name:</td>
               <td><springForm:input path="userName"/><br></td>
@@ -34,12 +34,9 @@
          <tr>
              <td><input type = "submit" name="submit" value="Member Login"/><br></td>
          </tr>
-         <tr>
-         	<td> <input type="checkbox" name="Remember" value="Remember" checked> Remember Me for 1 week<br></td>
-         </tr> 
 </springForm:form>
 
-<springForm:form method = "POST" action="registration">
+	<springForm:form method = "POST" action="registration">
          <tr>
              <td><input type = "submit" name="submit" value="New User?"/><br></td>
          </tr>

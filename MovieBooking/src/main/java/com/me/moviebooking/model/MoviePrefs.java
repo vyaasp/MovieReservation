@@ -3,7 +3,7 @@ package com.me.moviebooking.model;
 import java.util.List;
 
 public class MoviePrefs {
-	private Customer customer;
+	private String userName;
 	private List<Showtime> showtimes;
 	private UserPreferences up;
 	
@@ -11,18 +11,18 @@ public class MoviePrefs {
 		super();
 	}
 	
-	public MoviePrefs(Customer customer, List<Showtime> showtimes,
+	public MoviePrefs(String userName, List<Showtime> showtimes,
 			UserPreferences up) {
 		super();
-		this.customer = customer;
+		this.userName = userName;
 		this.showtimes = showtimes;
 		this.up = up;
 	}	
-	public Customer getCustomer() {
-		return customer;
+	public String getUserName() {
+		return userName;
 	}
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public UserPreferences getUp() {
 		return up;
